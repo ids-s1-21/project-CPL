@@ -20,7 +20,7 @@ And make sure to hide your code with  `echo = FALSE` unless the point you are tr
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
 ```{r load-data, echo = FALSE}
-read.csv("data/vgsales.csv")
+vgsales <- read.csv("data/vgsales.csv")
 ```
 
 ## Presentation
