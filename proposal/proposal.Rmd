@@ -17,6 +17,9 @@ library(broom)
 
 ## 2. Data
 
+```{r}
+glimpse(vgsales)
+```
 
 
 ## 3. Data analysis plan
