@@ -22,20 +22,16 @@ make is about the code itself. Your results with proper output and
 graphics go in your presentation, this space is for a brief summary of
 your project.
 
-    ##   Rank                     Name Platform Year        Genre Publisher NA_Sales
-    ## 1    1               Wii Sports      Wii 2006       Sports  Nintendo    41.49
-    ## 2    2        Super Mario Bros.      NES 1985     Platform  Nintendo    29.08
-    ## 3    3           Mario Kart Wii      Wii 2008       Racing  Nintendo    15.85
-    ## 4    4        Wii Sports Resort      Wii 2009       Sports  Nintendo    15.75
-    ## 5    5 Pokemon Red/Pokemon Blue       GB 1996 Role-Playing  Nintendo    11.27
-    ## 6    6                   Tetris       GB 1989       Puzzle  Nintendo    23.20
-    ##   EU_Sales JP_Sales Other_Sales Global_Sales
-    ## 1    29.02     3.77        8.46        82.74
-    ## 2     3.58     6.81        0.77        40.24
-    ## 3    12.88     3.79        3.31        35.82
-    ## 4    11.01     3.28        2.96        33.00
-    ## 5     8.89    10.22        1.00        31.37
-    ## 6     2.26     4.22        0.58        30.26
+    ## Rows: 271116 Columns: 15
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (10): name, sex, team, noc, games, season, city, sport, event, medal
+    ## dbl  (5): id, age, height, weight, year
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ## Presentation
 
