@@ -1,6 +1,6 @@
 Project title
 ================
-by Team name
+by CPL
 
 ## Summary
 
@@ -39,6 +39,12 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data
 
+There are 271,116 observations and 15 variables.
+
+Source: <https://www.kaggle.com/gregorut/videogamesales>
+
+www.sports-reference.com
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md>
 Include a citation for your data here. See
 <http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840> for guidance
 on proper citation for datasets. If you got your data off the web, make
