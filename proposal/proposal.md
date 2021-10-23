@@ -1,6 +1,6 @@
 Project proposal
 ================
-Team name
+CPL
 
 ``` r
 library(tidyverse)
@@ -14,7 +14,30 @@ the course website. Remove this text when completing your proposal*.
 
 ## 1. Introduction
 
+We got this dataset from Tidytuesday, and it was collected by
+JThomasmock from www.sports-reference.com.
+
+Each case is the athletes, and the variables are id, name, sex, age,
+height, weight, team, noc, games, year.
+
+General research question: 1. What is the correlation between the height
+of the athletes and the medals, if there is any?
+
+2.  Are younger athletes more likely to have a better performance than
+    older athletes?
+
+3.  Which team tends to perform better in Winter Olympics than Summer
+    Olympics?
+
+4.  Is the percentage of females attending the Olympics increasing over
+    years?
+
+5.Does the athletes from the host country tends to behave better by
+gaining more medals?
+
 ## 2. Data
+
+There are 16,598 observations and 11 variables.
 
 ``` r
 glimpse(olympics)
