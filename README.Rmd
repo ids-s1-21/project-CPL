@@ -22,7 +22,7 @@ Your results with proper output and graphics go in your presentation, this space
 ```{r load-data, echo = FALSE}
 
 olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
-
+write_rds(olympics, file = "data/olympics.csv")
 ```
 
 ## Presentation
