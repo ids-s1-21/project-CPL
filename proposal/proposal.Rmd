@@ -17,10 +17,10 @@ library(broom)
 
 ## 2. Data
 
+There are 16,598 observations and 11 variables. 
 ```{r}
 glimpse(vgsales)
 ```
-
 
 ## 3. Data analysis plan
 

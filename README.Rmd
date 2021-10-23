@@ -21,7 +21,7 @@ Your results with proper output and graphics go in your presentation, this space
 
 ```{r load-data, echo = FALSE}
 vgsales <- read.csv("data/vgsales.csv")
-head(vgsales)
+glimpse(vgsales)
 ```
 
 ## Presentation
@@ -29,6 +29,9 @@ head(vgsales)
 Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
+
+Source: https://www.kaggle.com/gregorut/videogamesales
+
 
 Include a citation for your data here. 
 See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
