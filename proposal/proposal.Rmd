@@ -7,6 +7,7 @@ output: github_document
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
+olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
 ```
 
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
@@ -18,7 +19,7 @@ library(broom)
 ## 2. Data
 
 ```{r}
-glimpse(vgsales)
+glimpse(olympics)
 ```
 
 
