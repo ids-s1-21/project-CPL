@@ -20,7 +20,9 @@ And make sure to hide your code with  `echo = FALSE` unless the point you are tr
 Your results with proper output and graphics go in your presentation, this space is for a brief summary of your project.
 
 ```{r load-data, echo = FALSE}
+
 olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+
 ```
 
 ## Presentation
@@ -28,6 +30,11 @@ olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/t
 Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
+
+
+Source: https://www.kaggle.com/gregorut/videogamesales
+
+
 
 www.sports-reference.com
 https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md
