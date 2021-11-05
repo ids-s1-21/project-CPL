@@ -33,16 +33,24 @@ glimpse(olympics)
 ## 3. Data analysis plan
 
 Are younger athletes more likely to have a better performance than older athletes? 
+  ggplot(aes(x = age, y = n)) +
+  geom_line() +
+  facet_grid(~medal)
 
 ```{r}
-olympics %>%
-  select(age, medal) %>%
+population <- olympics %>%
+  count(age)
+
+
+
+medal_by_age <- olympics %>%
   na.omit(medal) %>%
   group_by(age) %>%
-  count(medal) %>%
-  ggplot(aes(x = age, y = n)) +
-  geom_line()
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n) 
 
+left_join(medal_by_age, population)
 
 ```
 The x variable is the age and the y variable is the number of medals. A bar plot or a line graph can be used. If the peak from the graph appears to be at the younger age end, that means the younger athletes are more likely to have a better performance than older athletes. So the position of the peak is needed to support our hypothesized answer. 
