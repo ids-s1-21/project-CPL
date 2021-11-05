@@ -5,6 +5,7 @@
 
 There are 271,116 observations and 15 variables.
 
+Variables:
 - `id`: Athlete ID
 - `name`: Athlete Name
 - `sex`: Athlete Sex
