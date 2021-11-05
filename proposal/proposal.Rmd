@@ -41,8 +41,6 @@ Are younger athletes more likely to have a better performance than older athlete
 population <- olympics %>%
   count(age)
 
-
-
 medal_by_age <- olympics %>%
   na.omit(medal) %>%
   group_by(age) %>%
@@ -50,14 +48,48 @@ medal_by_age <- olympics %>%
   count(n_medal) %>%
   select(age, n) 
 
-left_join(medal_by_age, population)
+medal_by_age_2 <- medal_by_age %>%
+  left_join(population, by = "age")
+
+medal_by_age_2 %>%
+  mutate(proportion = n.x/n.y) %>%
+  ggplot(aes(x = age, y = proportion)) +
+  geom_line()
 
 ```
-The x variable is the age and the y variable is the number of medals. A bar plot or a line graph can be used. If the peak from the graph appears to be at the younger age end, that means the younger athletes are more likely to have a better performance than older athletes. So the position of the peak is needed to support our hypothesized answer. 
 
 
 
-Does the athletes from the host country tends to behave better by gaining more medals? 
+Which team tends to perform better in Winter Olympics than Summer Olympics? 
+```{r}
+total_medal_by_team <- olympics %>%
+  group_by(team) %>%
+  select(team, season, medal) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(team, n)
 
-We will choose a number of years and change the  host city names into their countries name so that we can compare the data. We may use scatter diagram to denote the  number of the medals for the host countries and other countries and then facet them to make the graph more tidy. An anomalous point for that country in the year that country hosted on the graph can support our hypothesized answer.
+winter_medal_by_team <- olympics %>%
+  group_by(team) %>%
+  select(team, season, medal) %>%
+  filter(season == "Winter") %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(team, n)
+  
+winter_medal_by_team %>%
+  left_join(total_medal_by_team, by = "team") %>%
+  mutate(proportion = n.x/n.y) %>%
+  arrange(desc(proportion)) %>%
+  filter(n.y >=100)
+
+
+```
+
+
+
+
+
 
