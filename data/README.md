@@ -1,12 +1,9 @@
 # data
 
-There are 271,116 observations and 15 variables.
-
-
-
-
 
 ## name of data file
+
+There are 271,116 observations and 15 variables.
 
 - `id`: Athlete ID
 - `name`: Athlete Name
