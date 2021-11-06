@@ -92,7 +92,7 @@ winter_medal_by_team %>%
 
 ```
 
-Narrative: We think it would be more clear if we demonstrate the answer as a table, so we did. We calculated the proportion by dividing the number of medal each team got on winter by all the medal they got from both Winter Olympics and Summer Olympics. As we can see from the table, Untied States tends to perform better on Winter Olympics because they have got 63 medals on winter out of 101. The proportion is 68.3% high. 
+Narrative: We think it would be more clear if we demonstrate the answer as a table, so we did. We calculated the proportion by dividing the number of medal each team got on winter by all the medal they got from both Winter Olympics and Summer Olympics. The first 5 countries on this table are mostly the countries who have cold weather and mountains, so we think it is reasonable for them to be behaving better on winter. As we can see from the table, Untied States tends to perform better on Winter Olympics because they have got 63 medals on winter out of 101. The proportion is 68.3% high. 
 
 
 
