@@ -55,8 +55,7 @@ glimpse(olympics)
 ## 3. Data analysis plan
 
 Are younger athletes more likely to have a better performance than older
-athletes? ggplot(aes(x = age, y = n)) + geom\_line() +
-facet\_grid(\~medal)
+athletes?
 
 ``` r
 population <- olympics %>%
@@ -80,17 +79,17 @@ medal_by_age_2 %>%
 
 ![](proposal_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-We think that the answer for the question is yes. The peak is at about
-27\~28 years old. The likelihood is gradually increasing from young age,
-have a peak at 27\~27, and decreasing over age. But, the interesting
-thing is that there are 2 bumps at about 42 years old and 53 years. We
-want to find out why if we can. We suppose there is the peak at 27\~28
-years old even though early twenties have better physical performance
-because early twenties have less experience for the Olympics, which is a
-big and making nervous competition, or have spent their time for the
-sports less than the older twenties. Anyway, it is generally true that
-the younger athletes are more likely to have a better performance than
-older athletes.
+Narrative: We think that the answer for the question is yes. The peak is
+at about 27\~28 years old. The likelihood is gradually increasing from
+young age, have a peak at 27\~27, and decreasing over age. But, the
+interesting thing is that there are 2 bumps at about 42 years old and 53
+years. We want to find out why if we can. We suppose there is the peak
+at 27\~28 years old even though early twenties have better physical
+performance because early twenties have less experience for the
+Olympics, which is a big and making nervous competition, or have spent
+their time for the sports less than the older twenties. Anyway, it is
+generally true that the younger athletes are more likely to have a
+better performance than older athletes.
 
 Which team tends to perform better in Winter Olympics than Summer
 Olympics?
@@ -117,21 +116,34 @@ winter_medal_by_team %>%
   left_join(total_medal_by_team, by = "team") %>%
   mutate(proportion = n.x/n.y) %>%
   arrange(desc(proportion)) %>%
-  filter(n.y >=100)
+  filter(n.y >=100) %>%
+  rename(winter_medal = n.x,
+         all_medal = n.y) %>%
+  mutate(team = case_when(
+    team == "United States-1" ~ "United States",
+    TRUE ~ team
+  ))
 ```
 
     ## # A tibble: 36 × 4
-    ## # Groups:   team [36]
-    ##    team              n.x   n.y proportion
-    ##    <chr>           <int> <int>      <dbl>
-    ##  1 United States-1    69   101      0.683
-    ##  2 Austria           244   413      0.591
-    ##  3 Czech Republic     73   134      0.545
-    ##  4 Norway            443   910      0.487
-    ##  5 Finland           426   876      0.486
-    ##  6 Canada            575  1243      0.463
-    ##  7 Czechoslovakia    158   486      0.325
-    ##  8 Switzerland       183   588      0.311
-    ##  9 Sweden            428  1434      0.298
-    ## 10 Russia            216  1110      0.195
+    ## # Groups:   team [35]
+    ##    team           winter_medal all_medal proportion
+    ##    <chr>                 <int>     <int>      <dbl>
+    ##  1 United States            69       101      0.683
+    ##  2 Austria                 244       413      0.591
+    ##  3 Czech Republic           73       134      0.545
+    ##  4 Norway                  443       910      0.487
+    ##  5 Finland                 426       876      0.486
+    ##  6 Canada                  575      1243      0.463
+    ##  7 Czechoslovakia          158       486      0.325
+    ##  8 Switzerland             183       588      0.311
+    ##  9 Sweden                  428      1434      0.298
+    ## 10 Russia                  216      1110      0.195
     ## # … with 26 more rows
+
+Narrative: We think it would be more clear if we demonstrate the answer
+as a table, so we did. We calculated the proportion by dividing the
+number of medal each team got on winter by all the medal they got from
+both Winter Olympics and Summer Olympics. As we can see from the table,
+Untied States tends to perform better on Winter Olympics because they
+have got 63 medals on winter out of 101. The proportion is 68.3% high.
