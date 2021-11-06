@@ -55,31 +55,71 @@ glimpse(olympics)
 ## 3. Data analysis plan
 
 Are younger athletes more likely to have a better performance than older
-athletes?
+athletes? ggplot(aes(x = age, y = n)) + geom\_line() +
+facet\_grid(\~medal)
 
 ``` r
-olympics %>%
-  select(age, medal) %>%
+population <- olympics %>%
+  count(age)
+
+medal_by_age <- olympics %>%
   na.omit(medal) %>%
   group_by(age) %>%
-  count(medal) %>%
-  ggplot(aes(x = age, y = n)) +
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n) 
+
+medal_by_age_2 <- medal_by_age %>%
+  left_join(population, by = "age")
+
+medal_by_age_2 %>%
+  mutate(proportion = n.x/n.y) %>%
+  ggplot(aes(x = age, y = proportion)) +
   geom_line()
 ```
 
-![](proposal_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> The x
-variable is the age and the y variable is the number of medals. A bar
-plot or a line graph can be used. If the peak from the graph appears to
-be at the younger age end, that means the younger athletes are more
-likely to have a better performance than older athletes. So the position
-of the peak is needed to support our hypothesized answer.
+![](proposal_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-Does the athletes from the host country tends to behave better by
-gaining more medals?
+Which team tends to perform better in Winter Olympics than Summer
+Olympics?
 
-We will choose a number of years and change the host city names into
-their countries name so that we can compare the data. We may use scatter
-diagram to denote the number of the medals for the host countries and
-other countries and then facet them to make the graph more tidy. An
-anomalous point for that country in the year that country hosted on the
-graph can support our hypothesized answer.
+``` r
+total_medal_by_team <- olympics %>%
+  group_by(team) %>%
+  select(team, season, medal) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(team, n)
+
+winter_medal_by_team <- olympics %>%
+  group_by(team) %>%
+  select(team, season, medal) %>%
+  filter(season == "Winter") %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(team, n)
+  
+winter_medal_by_team %>%
+  left_join(total_medal_by_team, by = "team") %>%
+  mutate(proportion = n.x/n.y) %>%
+  arrange(desc(proportion)) %>%
+  filter(n.y >=100)
+```
+
+    ## # A tibble: 36 × 4
+    ## # Groups:   team [36]
+    ##    team              n.x   n.y proportion
+    ##    <chr>           <int> <int>      <dbl>
+    ##  1 United States-1    69   101      0.683
+    ##  2 Austria           244   413      0.591
+    ##  3 Czech Republic     73   134      0.545
+    ##  4 Norway            443   910      0.487
+    ##  5 Finland           426   876      0.486
+    ##  6 Canada            575  1243      0.463
+    ##  7 Czechoslovakia    158   486      0.325
+    ##  8 Switzerland       183   588      0.311
+    ##  9 Sweden            428  1434      0.298
+    ## 10 Russia            216  1110      0.195
+    ## # … with 26 more rows
