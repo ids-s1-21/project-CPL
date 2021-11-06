@@ -58,7 +58,7 @@ medal_by_age_2 %>%
 
 ```
 
-
+We think that the answer for the question is yes. The peak is at about 27~28 years old. The likelihood is gradually increasing from young age, have a peak at 27~27, and decreasing over age. But, the interesting thing is that there are 2 bumps at about 42 years old and 53 years. We want to find out why if we can.  We suppose there is the peak at 27~28 years old even though early twenties have better physical performance because early twenties have less experience for the Olympics, which is a big and making nervous competition, or have spent their time for the sports less than the older twenties. Anyway, it is generally true that the younger athletes are more likely to have a better performance than older athletes.
 
 Which team tends to perform better in Winter Olympics than Summer Olympics? 
 ```{r}
