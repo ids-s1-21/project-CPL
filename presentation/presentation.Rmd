@@ -32,6 +32,7 @@ read_csv(here::here("data/olympics.csv"))
  
 - Does the athletes from the host country tends to behave better by gaining more medals?
 
+# We are going to add variable(sports) and analyse questions by sports
 
 # Section title
 
