@@ -33,10 +33,6 @@ glimpse(olympics)
 ## 3. Data analysis plan
 
 Are younger athletes more likely to have a better performance than older athletes? 
-  ggplot(aes(x = age, y = n)) +
-  geom_line() +
-  facet_grid(~medal)
-
 ```{r}
 population <- olympics %>%
   count(age)
@@ -58,7 +54,9 @@ medal_by_age_2 %>%
 
 ```
 
-We think that the answer for the question is yes. The peak is at about 27~28 years old. The likelihood is gradually increasing from young age, have a peak at 27~27, and decreasing over age. But, the interesting thing is that there are 2 bumps at about 42 years old and 53 years. We want to find out why if we can.  We suppose there is the peak at 27~28 years old even though early twenties have better physical performance because early twenties have less experience for the Olympics, which is a big and making nervous competition, or have spent their time for the sports less than the older twenties. Anyway, it is generally true that the younger athletes are more likely to have a better performance than older athletes.
+Narrative: We think that the answer for the question is yes. The peak is at about 27~28 years old. The likelihood is gradually increasing from young age, have a peak at 27~27, and decreasing over age. But, the interesting thing is that there are 2 bumps at about 42 years old and 53 years. We want to find out why if we can.  We suppose there is the peak at 27~28 years old even though early twenties have better physical performance because early twenties have less experience for the Olympics, which is a big and making nervous competition, or have spent their time for the sports less than the older twenties. Anyway, it is generally true that the younger athletes are more likely to have a better performance than older athletes.
+
+
 
 Which team tends to perform better in Winter Olympics than Summer Olympics? 
 ```{r}
@@ -83,12 +81,18 @@ winter_medal_by_team %>%
   left_join(total_medal_by_team, by = "team") %>%
   mutate(proportion = n.x/n.y) %>%
   arrange(desc(proportion)) %>%
-  filter(n.y >=100)
+  filter(n.y >=100) %>%
+  rename(winter_medal = n.x,
+         all_medal = n.y) %>%
+  mutate(team = case_when(
+    team == "United States-1" ~ "United States",
+    TRUE ~ team
+  ))
 
 
 ```
 
-
+Narrative: We think it would be more clear if we demonstrate the answer as a table, so we did. We calculated the proportion by dividing the number of medal each team got on winter by all the medal they got from both Winter Olympics and Summer Olympics. The first 5 countries on this table are mostly the countries who have cold weather and mountains, so we think it is reasonable for them to be behaving better on winter. As we can see from the table, Untied States tends to perform better on Winter Olympics because they have got 63 medals on winter out of 101. The proportion is 68.3% high. 
 
 
 
