@@ -41,10 +41,7 @@ Our presentation can be found [here](presentation/presentation.html).
 
 There are 271,116 observations and 15 variables.
 
-www.sports-reference.com
-<https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md>
-
 ## References
 
-List any references here. You should, at a minimum, list your data
-source.
+The data fram was found at \<www.sports-reference.com> , which is from
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md>.
