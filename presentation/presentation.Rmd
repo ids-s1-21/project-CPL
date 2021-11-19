@@ -28,9 +28,9 @@ read_csv(here::here("data/olympics.csv"))
 ```
 
 ##  General Research Question {data-background-image="img/confetti.jpg"}
-1. Are younger athletes more likely to have a better performance than older athletes? 
+- Are younger athletes more likely to have a better performance than older athletes? 
  
-2. Does the athletes from the host country tends to behave better by gaining more medals?
+- Does the athletes from the host country tends to behave better by gaining more medals?
 
 
 # Section title
