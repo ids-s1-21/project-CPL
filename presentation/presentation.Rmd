@@ -24,7 +24,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+read_csv(here::here("data/olympics.csv"))
 ```
 
 ## A statement of the overall goal / research question {data-background-image="img/confetti.jpg"}
