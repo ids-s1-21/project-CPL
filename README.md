@@ -1,4 +1,4 @@
-Project title
+Olympics analysis
 ================
 by CPL
 
