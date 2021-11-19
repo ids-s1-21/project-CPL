@@ -27,7 +27,11 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 read_csv(here::here("data/olympics.csv"))
 ```
 
-## A statement of the overall goal / research question {data-background-image="img/confetti.jpg"}
+##  General Research Question {data-background-image="img/confetti.jpg"}
+1. Are younger athletes more likely to have a better performance than older athletes? 
+ 
+2. Does the athletes from the host country tends to behave better by gaining more medals?
+
 
 # Section title
 
