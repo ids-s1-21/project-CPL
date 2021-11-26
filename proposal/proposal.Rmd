@@ -2,12 +2,15 @@
 title: "Project proposal"
 author: "CPL"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 library(broom)
 olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+library(tidymodels)
 ```
 
 *For instructions on what each section should include, please see the [project page](https://idsed.digital/assessments/project/#proposal) on the course website. Remove this text when completing your proposal*.
@@ -98,11 +101,16 @@ Narrative: We think it would be more clear if we demonstrate the answer as a tab
 Specific questions: 
 1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
 ```{r}
-olympics %>%
+olympics_medal <- olympics %>%
   group_by(age) %>%
+  select(age, medal) %>%
+  na.omit(medal) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
-  count(n_medal) %>%
-  select(age, n)
+  count(n_medal)
+
+olympics_medal %>%
+  ggplot(aes(x = age, y = n)) +
+  geom_line()
 ```
 
 ```{r}
@@ -198,34 +206,27 @@ According to the previous two tibbles, the top three number of medals are shooti
 Also from the box plot in the previous question, equestrianism has the highest median among all the sports. Although shooting and sailing do not have such high median, the interquartile range for these two sports are outstandingly higher than the others.
 
 3. Make a model related to the height and the probability of wining medals.
-```{r}
-#load the modelling pacakage
-library(tidymodels)
-```
-```{r}
-#model_olympics <- olympics %>%
-#  group_by(medal) %>%
-#  na.omit(medal) %>%
-#  count(medal) %>%
-#  mutate(proportion_medal = (10148+10167+9866)/271116)
-#model_olympics
-
-
-#linear_reg()%>%
- # set_engine("lm")%>%
-  #fit(height ~ proportion_medal, data = model_olympics)
-
-```
 
 ```{r}
+model_olympics <- olympics %>%
+  mutate(medal_yes = if_else(
+  medal %in% c("Gold", "Silver", "Bronze"),
+  true = 1,
+  false = 0
+  ))
 
-set.seed(1369)
-# Split into 80% and 20% 
-olympics_split <- initial_split(olympics, prop = 0.80)
-train_data <- training(olympics_split)
-test_data <- testing(olympics_split) 
+yes_model_olympics <- model_olympics %>%
+  group_by(height) %>%
+  mutate(probability_medal = sum(medal_yes)/nrow(model_olympics)) %>%
+  filter(medal_yes == 1) %>%
+  filter(height >= 150, height <= 185)
 
+yes_model_olympics %>%
+  ggplot(aes(x = height, y = probability_medal)) +
+  geom_line()
+
+linear_reg()%>%
+  set_engine("lm")%>%
+  fit(probability_medal ~ height, data = yes_model_olympics) %>%
+  tidy()
 ```
-
-
-

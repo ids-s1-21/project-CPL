@@ -155,28 +155,19 @@ Specific questions: 1. The number of athletes per age and see what kind
 of sports that younger athletes are good at using ggplot.
 
 ``` r
-olympics %>%
+olympics_medal <- olympics %>%
   group_by(age) %>%
+  select(age, medal) %>%
+  na.omit(medal) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
-  count(n_medal) %>%
-  select(age, n)
+  count(n_medal)
+
+olympics_medal %>%
+  ggplot(aes(x = age, y = n)) +
+  geom_line()
 ```
 
-    ## # A tibble: 136 × 2
-    ## # Groups:   age [75]
-    ##      age     n
-    ##    <dbl> <int>
-    ##  1    10     1
-    ##  2    11    12
-    ##  3    11     1
-    ##  4    12    33
-    ##  5    12     6
-    ##  6    13   171
-    ##  7    13    16
-    ##  8    14   762
-    ##  9    14    75
-    ## 10    15  2007
-    ## # … with 126 more rows
+![](proposal_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 olympics %>%
@@ -344,13 +335,13 @@ library(tidymodels)
     ##   method                   from   
     ##   required_pkgs.model_spec parsnip
 
-    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──
+    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.3 ──
 
-    ## ✓ dials        0.0.10     ✓ rsample      0.1.1 
-    ## ✓ infer        1.0.0      ✓ tune         0.1.6 
-    ## ✓ modeldata    0.1.1      ✓ workflows    0.2.4 
+    ## ✓ dials        0.0.9      ✓ rsample      0.1.0 
+    ## ✓ infer        0.5.4      ✓ tune         0.1.6 
+    ## ✓ modeldata    0.1.1      ✓ workflows    0.2.3 
     ## ✓ parsnip      0.1.7      ✓ workflowsets 0.1.0 
-    ## ✓ recipes      0.1.17     ✓ yardstick    0.0.9
+    ## ✓ recipes      0.1.16     ✓ yardstick    0.0.8
 
     ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
     ## x scales::discard() masks purrr::discard()
@@ -359,7 +350,7 @@ library(tidymodels)
     ## x dplyr::lag()      masks stats::lag()
     ## x yardstick::spec() masks readr::spec()
     ## x recipes::step()   masks stats::step()
-    ## • Search for functions across packages at https://www.tidymodels.org/find/
+    ## • Use tidymodels_prefer() to resolve common conflicts.
 
 ``` r
 #model_olympics <- olympics %>%
