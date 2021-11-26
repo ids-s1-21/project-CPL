@@ -309,17 +309,6 @@ olympics %>%
     ## 4 Fencing           1
     ## 5 Rowing            1
 
-According to the previous two tibbles, the top three number of medals
-are shooting, sailing and equestrianism. The box plot shows the range
-and the density for each three of them. We can see that for
-equestrianism, the median and the range of age are significantly higher
-than the other two. (in the presentation, maybe we can use the boxplot
-for the overall sports again here to make conclusions about the spikes)
-Also from the box plot in the previous question, equestrianism has the
-highest median among all the sports. Although shooting and sailing do
-not have such high median, the interquartile range for these two sports
-are outstandingly higher than the others.
-
 ``` r
 olympics %>%
   filter(sport %in% c("Equestrianism", "Sailing", "Shooting")) %>%
@@ -332,7 +321,64 @@ olympics %>%
 
 ![](proposal_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-In conclusion, eq
+According to the previous two tibbles, the top three number of medals
+are shooting, sailing and equestrianism. The box plot shows the range
+and the density for each three of them. We can see that for
+equestrianism, the median and the range of age are significantly higher
+than the other two. (in the presentation, maybe we can use the boxplot
+for the overall sports again here to make conclusions about the spikes)
+Also from the box plot in the previous question, equestrianism has the
+highest median among all the sports. Although shooting and sailing do
+not have such high median, the interquartile range for these two sports
+are outstandingly higher than the others.
 
-3.  Make a model related to the age and the probability of wining
+3.  Make a model related to the height and the probability of wining
     medals.
+
+``` r
+#load the modelling pacakage
+library(tidymodels)
+```
+
+    ## Registered S3 method overwritten by 'tune':
+    ##   method                   from   
+    ##   required_pkgs.model_spec parsnip
+
+    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.4 ──
+
+    ## ✓ dials        0.0.10     ✓ rsample      0.1.1 
+    ## ✓ infer        1.0.0      ✓ tune         0.1.6 
+    ## ✓ modeldata    0.1.1      ✓ workflows    0.2.4 
+    ## ✓ parsnip      0.1.7      ✓ workflowsets 0.1.0 
+    ## ✓ recipes      0.1.17     ✓ yardstick    0.0.9
+
+    ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+    ## x scales::discard() masks purrr::discard()
+    ## x dplyr::filter()   masks stats::filter()
+    ## x recipes::fixed()  masks stringr::fixed()
+    ## x dplyr::lag()      masks stats::lag()
+    ## x yardstick::spec() masks readr::spec()
+    ## x recipes::step()   masks stats::step()
+    ## • Search for functions across packages at https://www.tidymodels.org/find/
+
+``` r
+#model_olympics <- olympics %>%
+#  group_by(medal) %>%
+#  na.omit(medal) %>%
+#  count(medal) %>%
+#  mutate(proportion_medal = (10148+10167+9866)/271116)
+#model_olympics
+
+
+#linear_reg()%>%
+ # set_engine("lm")%>%
+  #fit(height ~ proportion_medal, data = model_olympics)
+```
+
+``` r
+set.seed(1369)
+# Split into 80% and 20% 
+olympics_split <- initial_split(olympics, prop = 0.80)
+train_data <- training(olympics_split)
+test_data <- testing(olympics_split) 
+```

@@ -197,7 +197,35 @@ According to the previous two tibbles, the top three number of medals are shooti
 (in the presentation, maybe we can use the boxplot for the overall sports again here to make conclusions about the spikes)
 Also from the box plot in the previous question, equestrianism has the highest median among all the sports. Although shooting and sailing do not have such high median, the interquartile range for these two sports are outstandingly higher than the others.
 
-3. Make a model related to the age and the probability of wining medals.
+3. Make a model related to the height and the probability of wining medals.
+```{r}
+#load the modelling pacakage
+library(tidymodels)
+```
+```{r}
+#model_olympics <- olympics %>%
+#  group_by(medal) %>%
+#  na.omit(medal) %>%
+#  count(medal) %>%
+#  mutate(proportion_medal = (10148+10167+9866)/271116)
+#model_olympics
+
+
+#linear_reg()%>%
+ # set_engine("lm")%>%
+  #fit(height ~ proportion_medal, data = model_olympics)
+
+```
+
+```{r}
+
+set.seed(1369)
+# Split into 80% and 20% 
+olympics_split <- initial_split(olympics, prop = 0.80)
+train_data <- training(olympics_split)
+test_data <- testing(olympics_split) 
+
+```
 
 
 
