@@ -29,10 +29,14 @@ read_csv(here::here("data/olympics.csv"))
 
 ##  General Research Question {data-background-image="img/confetti.jpg"}
 - Are younger athletes more likely to have a better performance than older athletes? 
- 
-- Does the athletes from the host country tends to behave better by gaining more medals?
 
 # We are going to add variable(sports) and analyse questions by sports
+
+Specific questions: 
+1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
+2. Which sports cause the two spikes around the age 46 and 52. 
+3. Make a model related to the age and the probability of wining medals.
+
 
 # Section title
 
