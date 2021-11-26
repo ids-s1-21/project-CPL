@@ -193,6 +193,18 @@ olympics %>%
 
 ``` r
 olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  ggplot(aes(y = sport, x = age, colour = sport)) +
+  geom_boxplot() +
+  theme(axis.text.y = element_text(size = 6), legend.position = "none")
+```
+
+![](proposal_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+
+``` r
+olympics %>%
   count(sport, sort = TRUE)
 ```
 
@@ -296,7 +308,7 @@ olympics %>%
   group_by(age) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   ggplot(aes(x = age, y = sport, colour = age)) +
-  geom_boxplot()
+  geom_violin()
 ```
 
 ![](proposal_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> 3. Make a

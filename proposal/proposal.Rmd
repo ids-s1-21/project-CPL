@@ -114,6 +114,14 @@ olympics %>%
   ggplot(aes(x = sport, y = age, colour = age)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 30))
+
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  ggplot(aes(y = sport, x = age, colour = sport)) +
+  geom_boxplot() +
+  theme(axis.text.y = element_text(size = 6), legend.position = "none")
   
 olympics %>%
   count(sport, sort = TRUE)
@@ -175,7 +183,7 @@ olympics %>%
   group_by(age) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   ggplot(aes(x = age, y = sport, colour = age)) +
-  geom_boxplot()
+  geom_violin()
 
 
 ```
