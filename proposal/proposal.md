@@ -144,6 +144,74 @@ winter_medal_by_team %>%
 Narrative: We think it would be more clear if we demonstrate the answer
 as a table, so we did. We calculated the proportion by dividing the
 number of medal each team got on winter by all the medal they got from
-both Winter Olympics and Summer Olympics. As we can see from the table,
-Untied States tends to perform better on Winter Olympics because they
-have got 63 medals on winter out of 101. The proportion is 68.3% high.
+both Winter Olympics and Summer Olympics. The first 5 countries on this
+table are mostly the countries who have cold weather and mountains, so
+we think it is reasonable for them to be behaving better on winter. As
+we can see from the table, Untied States tends to perform better on
+Winter Olympics because they have got 63 medals on winter out of 101.
+The proportion is 68.3% high.
+
+Specific questions: 1. The number of athletes per age and see what kind
+of sports that younger athletes are good at using ggplot.
+
+``` r
+olympics %>%
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n)
+```
+
+    ## # A tibble: 136 × 2
+    ## # Groups:   age [75]
+    ##      age     n
+    ##    <dbl> <int>
+    ##  1    10     1
+    ##  2    11    12
+    ##  3    11     1
+    ##  4    12    33
+    ##  5    12     6
+    ##  6    13   171
+    ##  7    13    16
+    ##  8    14   762
+    ##  9    14    75
+    ## 10    15  2007
+    ## # … with 126 more rows
+
+``` r
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",       "Cycling", "Fencing", "Rowing", "Cross Country Skiing", "Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
+  ggplot(aes(x = sport, y = age, colour = age)) +
+  geom_jitter(alpha = 0.3) +
+  theme(axis.text.x = element_text(angle = 30))
+```
+
+![](proposal_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+``` r
+olympics %>%
+  count(sport, sort = TRUE)
+```
+
+    ## # A tibble: 66 × 2
+    ##    sport                    n
+    ##    <chr>                <int>
+    ##  1 Athletics            38624
+    ##  2 Gymnastics           26707
+    ##  3 Swimming             23195
+    ##  4 Shooting             11448
+    ##  5 Cycling              10859
+    ##  6 Fencing              10735
+    ##  7 Rowing               10595
+    ##  8 Cross Country Skiing  9133
+    ##  9 Alpine Skiing         8829
+    ## 10 Wrestling             7154
+    ## # … with 56 more rows
+
+2.  Which sports cause the two spikes around the age 46 and 52.
+
+3.  Make a model related to the age and the probability of wining
+    medals.

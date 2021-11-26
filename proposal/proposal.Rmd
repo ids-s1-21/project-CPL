@@ -99,10 +99,10 @@ Specific questions:
 1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
 ```{r}
 olympics %>%
-  count(age) %>%
-  ggplot(aes(x = age, y =n)) +
-  geom_line()
-
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n)
 ```
 
 ```{r}
@@ -112,7 +112,7 @@ olympics %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",		"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
   ggplot(aes(x = sport, y = age, colour = age)) +
-  geom_jitter() +
+  geom_jitter(alpha = 0.3) +
   theme(axis.text.x = element_text(angle = 30))
   
 olympics %>%
