@@ -185,7 +185,7 @@ olympics %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",       "Cycling", "Fencing", "Rowing", "Cross Country Skiing", "Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
   ggplot(aes(x = sport, y = age, colour = age)) +
-  geom_jitter(alpha = 0.3) +
+  geom_boxplot() +
   theme(axis.text.x = element_text(angle = 30))
 ```
 
@@ -211,7 +211,93 @@ olympics %>%
     ## 10 Wrestling             7154
     ## # … with 56 more rows
 
-2.  Which sports cause the two spikes around the age 46 and 52.
+2.  Which sports cause the two spikes around the age 46 and 52?
 
-3.  Make a model related to the age and the probability of wining
-    medals.
+``` r
+population <- olympics %>%
+  count(age)
+
+medal_by_age <- olympics %>%
+  na.omit(medal) %>%
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n) 
+
+medal_by_age_2 <- medal_by_age %>%
+  left_join(population, by = "age")
+
+medal_by_age_2 %>%
+  mutate(proportion = n.x/n.y) %>%
+  ggplot(aes(x = age, y = proportion)) +
+  geom_line() +
+  xlim(44,55)
+```
+
+    ## Warning: Removed 38 row(s) containing missing values (geom_path).
+
+![](proposal_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+olympics %>%
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(age) %>%
+  select(age, n) %>%
+  ggplot(aes(x = age, y = n)) +
+  geom_line() +
+  xlim(44,55) +
+  ylim(0,1000)
+```
+
+    ## Warning: Removed 63 row(s) containing missing values (geom_path).
+
+![](proposal_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
+olympics %>%
+  filter(age > 44, age < 48 ) %>%
+  na.omit(medal) %>%
+  count(sport, sort = TRUE)
+```
+
+    ## # A tibble: 8 × 2
+    ##   sport             n
+    ##   <chr>         <int>
+    ## 1 Equestrianism    47
+    ## 2 Shooting         14
+    ## 3 Sailing          11
+    ## 4 Curling           3
+    ## 5 Rowing            3
+    ## 6 Fencing           2
+    ## 7 Archery           1
+    ## 8 Bobsleigh         1
+
+``` r
+olympics %>%
+  filter(age > 50, age < 54 ) %>%
+  na.omit(medal) %>%
+  count(sport, sort = TRUE)
+```
+
+    ## # A tibble: 5 × 2
+    ##   sport             n
+    ##   <chr>         <int>
+    ## 1 Equestrianism    16
+    ## 2 Sailing           4
+    ## 3 Shooting          3
+    ## 4 Fencing           1
+    ## 5 Rowing            1
+
+``` r
+olympics %>%
+  filter(sport %in% c("Equestrianism", "Sailing", "Shooting")) %>%
+  na.omit(medal) %>%
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  ggplot(aes(x = age, y = sport, colour = age)) +
+  geom_boxplot()
+```
+
+![](proposal_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> 3. Make a
+model related to the age and the probability of wining medals.
