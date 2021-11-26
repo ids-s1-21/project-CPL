@@ -27,7 +27,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 read_csv(here::here("data/olympics.csv"))
 ```
 
-##  General Research Question {data-background-image="img/confetti.jpg"}
+##  General Research Question
 - Are younger athletes more likely to have a better performance than older athletes? 
 
 # We are going to add variable(sports) and analyse questions by sports
@@ -38,15 +38,28 @@ Specific questions:
 3. Make a model related to the age and the probability of wining medals.
 
 
-# Section title
+# The number of athletes per age
 
-# Hello World
+```{r}
+olympics_medal <- olympics %>%
+  group_by(age) %>%
+  select(age, medal) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal)
+
+olympics_medal %>%
+  ggplot(aes(x = age, y = n)) +
+  geom_line()
+```
+
+# What kind of sports that younger athletes are good at?
 
 - Click the `Knit` button to compile your presentation
 
 - Make sure to commit and push all resulting files to your GitHub repo
 
-# Using reveal.js
+# The two spikes around the age 46 and 52.
 
 It's possible to have a horizontal sliding transition as well as nest multiple slides to create a vertical stack.
 
