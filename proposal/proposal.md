@@ -225,6 +225,8 @@ olympics %>%
 
 2.  Which sports cause the two spikes around the age 46 and 52?
 
+These are the enlargement of the previous graphs from the age 44 to 55.
+
 ``` r
 population <- olympics %>%
   count(age)
@@ -266,6 +268,9 @@ olympics %>%
 
 ![](proposal_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
+This is the number of medals the athletes (from age 44 to 48) got by
+sport.
+
 ``` r
 olympics %>%
   filter(age > 44, age < 48 ) %>%
@@ -285,6 +290,9 @@ olympics %>%
     ## 7 Archery           1
     ## 8 Bobsleigh         1
 
+This is the number of medals the athletes (from age 50 to 54) got by
+sport.
+
 ``` r
 olympics %>%
   filter(age > 50, age < 54 ) %>%
@@ -301,6 +309,17 @@ olympics %>%
     ## 4 Fencing           1
     ## 5 Rowing            1
 
+According to the previous two tibbles, the top three number of medals
+are shooting, sailing and equestrianism. The box plot shows the range
+and the density for each three of them. We can see that for
+equestrianism, the median and the range of age are significantly higher
+than the other two. (in the presentation, maybe we can use the boxplot
+for the overall sports again here to make conclusions about the spikes)
+Also from the box plot in the previous question, equestrianism has the
+highest median among all the sports. Although shooting and sailing do
+not have such high median, the interquartile range for these two sports
+are outstandingly higher than the others.
+
 ``` r
 olympics %>%
   filter(sport %in% c("Equestrianism", "Sailing", "Shooting")) %>%
@@ -308,8 +327,12 @@ olympics %>%
   group_by(age) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   ggplot(aes(x = age, y = sport, colour = age)) +
-  geom_violin()
+  geom_boxplot()
 ```
 
-![](proposal_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> 3. Make a
-model related to the age and the probability of wining medals.
+![](proposal_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+In conclusion, eq
+
+3.  Make a model related to the age and the probability of wining
+    medals.
