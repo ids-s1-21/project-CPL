@@ -6,6 +6,7 @@ CPL
 library(tidyverse)
 library(broom)
 olympics <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-27/olympics.csv')
+library(tidymodels)
 ```
 
 *For instructions on what each section should include, please see the
@@ -327,49 +328,35 @@ are outstandingly higher than the others.
     medals.
 
 ``` r
-#load the modelling pacakage
-library(tidymodels)
+model_olympics <- olympics %>%
+  mutate(medal_yes = if_else(
+  medal %in% c("Gold", "Silver", "Bronze"),
+  true = 1,
+  false = 0
+  ))
+
+yes_model_olympics <- model_olympics %>%
+  group_by(height) %>%
+  mutate(probability_medal = sum(medal_yes)/nrow(model_olympics)) %>%
+  filter(medal_yes == 1) %>%
+  filter(height >= 150, height <= 185)
+
+yes_model_olympics %>%
+  ggplot(aes(x = height, y = probability_medal)) +
+  geom_line()
 ```
 
-    ## Registered S3 method overwritten by 'tune':
-    ##   method                   from   
-    ##   required_pkgs.model_spec parsnip
-
-    ## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.3 ──
-
-    ## ✓ dials        0.0.9      ✓ rsample      0.1.0 
-    ## ✓ infer        0.5.4      ✓ tune         0.1.6 
-    ## ✓ modeldata    0.1.1      ✓ workflows    0.2.3 
-    ## ✓ parsnip      0.1.7      ✓ workflowsets 0.1.0 
-    ## ✓ recipes      0.1.16     ✓ yardstick    0.0.8
-
-    ## ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
-    ## x scales::discard() masks purrr::discard()
-    ## x dplyr::filter()   masks stats::filter()
-    ## x recipes::fixed()  masks stringr::fixed()
-    ## x dplyr::lag()      masks stats::lag()
-    ## x yardstick::spec() masks readr::spec()
-    ## x recipes::step()   masks stats::step()
-    ## • Use tidymodels_prefer() to resolve common conflicts.
+![](proposal_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
-#model_olympics <- olympics %>%
-#  group_by(medal) %>%
-#  na.omit(medal) %>%
-#  count(medal) %>%
-#  mutate(proportion_medal = (10148+10167+9866)/271116)
-#model_olympics
-
-
-#linear_reg()%>%
- # set_engine("lm")%>%
-  #fit(height ~ proportion_medal, data = model_olympics)
+linear_reg()%>%
+  set_engine("lm")%>%
+  fit(probability_medal ~ height, data = yes_model_olympics) %>%
+  tidy()
 ```
 
-``` r
-set.seed(1369)
-# Split into 80% and 20% 
-olympics_split <- initial_split(olympics, prop = 0.80)
-train_data <- training(olympics_split)
-test_data <- testing(olympics_split) 
-```
+    ## # A tibble: 2 × 5
+    ##   term         estimate  std.error statistic p.value
+    ##   <chr>           <dbl>      <dbl>     <dbl>   <dbl>
+    ## 1 (Intercept) -0.0184   0.000196       -94.0       0
+    ## 2 height       0.000128 0.00000113     114.        0
