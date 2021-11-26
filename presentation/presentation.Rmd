@@ -6,6 +6,9 @@ date: <font size = '6'>`r Sys.Date()`</font>
 output:
   revealjs::revealjs_presentation:
     self_contained: false
+    theme : sky
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r load-packages, include = FALSE}
@@ -27,10 +30,10 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 olympics <- read_csv(here::here("data/olympics.csv"))
 ```
 
-##  General Research Question
+## General Research Question {data-transition="zoom"}
 - Are younger athletes more likely to have a better performance than older athletes? 
 
-# We are going to add variable(sports) and analyse questions by sports
+## We are going to add variable(sports) and analyse questions by sports {data-transition="zoom"}
 
 Specific questions: 
 1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
@@ -38,9 +41,9 @@ Specific questions:
 3. Make a model related to the age and the probability of wining medals.
 
 
-# The number of athletes per age
+## The number of athletes per age {data-transition="zoom"}
 
-```{r number_of_athletes_per_age, echo = FALSE}
+```{r number-of-athletes-per-age, echo = FALSE}
 olympics_medal <- olympics %>%
   group_by(age) %>%
   select(age, medal) %>%
@@ -50,16 +53,70 @@ olympics_medal <- olympics %>%
 
 olympics_medal %>%
   ggplot(aes(x = age, y = n)) +
-  geom_line()
+  geom_line() +
+  labs(
+    x = "Age",
+    y = "Number of athletes"
+  ) +
+  theme_minimal()
 ```
 
-# What kind of sports that younger athletes are good at?
+## What kind of sports that younger athletes are good at? {data-transition="zoom"}
 
-- Click the `Knit` button to compile your presentation
+```{r Top12-sports-that-younger-athletes-are-good-at , echo = FALSE}
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",		"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
+  ggplot(aes(x = sport, y = age, colour = age)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 30))
+```
+
+## Plot and text
+
+::: columns
+:::: column
+* Some text
+* goes here
+::::
+
+:::: column
+```{r All-sports-that-younger-athletes-are-good-at , echo = FALSE}
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  ggplot(aes(y = sport, x = age, colour = sport)) +
+  geom_boxplot() +
+  theme(axis.text.y = element_text(size = 6), legend.position = "none")
+```
+::::
+:::
+
+## Different widths
+
+::: columns
+:::: {.column width="40%"}
+* Some text
+* goes here
+::::
+
+:::: {.column width="60%"}
+```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
+# see how I changed out.width and fig.width from defaults
+# to make the figure bigger
+ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+::::
+:::
 
 - Make sure to commit and push all resulting files to your GitHub repo
 
-# The two spikes around the age 46 and 52.
+## The two spikes around the age 46 and 52. {data-transition="zoom"}
 
 It's possible to have a horizontal sliding transition as well as nest multiple slides to create a vertical stack.
 
@@ -67,7 +124,7 @@ When presenting, you use the left/right arrows to step through the top-level (ho
 
 (click the down key now)
 
-## reveal.js
+## reveal.js {data-transition="zoom"}
 
 - The presentation is created using the `reveal.js` package
 
