@@ -24,7 +24,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-read_csv(here::here("data/olympics.csv"))
+olympics <- read_csv(here::here("data/olympics.csv"))
 ```
 
 ##  General Research Question
@@ -40,7 +40,7 @@ Specific questions:
 
 # The number of athletes per age
 
-```{r}
+```{r number_of_athletes_per_age, echo = FALSE}
 olympics_medal <- olympics %>%
   group_by(age) %>%
   select(age, medal) %>%
