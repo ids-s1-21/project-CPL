@@ -99,10 +99,24 @@ Specific questions:
 1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
 ```{r}
 olympics %>%
-  ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 1) +
-  geom_smooth() +
-  xlim(10,80)
+  count(age) %>%
+  ggplot(aes(x = age, y =n)) +
+  geom_line()
+
+```
+
+```{r}
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",		"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
+  ggplot(aes(x = sport, y = age, colour = age)) +
+  geom_jitter() +
+  theme(axis.text.x = element_text(angle = 30))
+  
+olympics %>%
+  count(sport, sort = TRUE)
 
 ```
 2. Which sports cause the two spikes around the age 46 and 52. 
