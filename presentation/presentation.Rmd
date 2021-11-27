@@ -6,7 +6,7 @@ date: <font size = '6'>`r Sys.Date()`</font>
 output:
   revealjs::revealjs_presentation:
     self_contained: false
-    theme : sky
+    theme : beige
 editor_options: 
   chunk_output_type: console
 ---
@@ -41,8 +41,11 @@ include_graphics(c("https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=
 ## We are going to add variable(sports) and analyse questions by sports {data-transition="zoom"}
 
 Specific questions: 
+
 1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
+
 2. Which sports cause the two spikes around the age 46 and 52. 
+
 3. Make a model related to the age and the probability of wining medals.
 
 
