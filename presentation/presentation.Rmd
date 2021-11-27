@@ -31,7 +31,12 @@ olympics <- read_csv(here::here("data/olympics.csv"))
 ```
 
 ## General Research Question {data-transition="zoom"}
-- Are younger athletes more likely to have a better performance than older athletes? 
+
+Are younger athletes more likely to have a better performance than older athletes?
+```{r young athelet , echo = FALSE, out.width = "50%", fig.align = "default", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics(c("https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=auto", "https://p0.itc.cn/q_70/images03/20210726/3436c6131ced4185ac9dc9e90f80ab0f.jpeg"))
+```
+
 
 ## We are going to add variable(sports) and analyse questions by sports {data-transition="zoom"}
 
