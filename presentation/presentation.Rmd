@@ -61,7 +61,7 @@ olympics_medal %>%
   theme_minimal()
 ```
 
-## What kind of sports that younger athletes are good at? {data-transition="zoom"}
+# What kind of sports that younger athletes are good at? {data-transition="zoom"}
 
 ```{r Top12-sports-that-younger-athletes-are-good-at , echo = FALSE}
 olympics %>%
@@ -95,7 +95,7 @@ olympics %>%
 ::::
 :::
 
-## Different widths
+# Different widths
 
 ::: columns
 :::: {.column width="40%"}
@@ -124,7 +124,7 @@ When presenting, you use the left/right arrows to step through the top-level (ho
 
 (click the down key now)
 
-## reveal.js {data-transition="zoom"}
+# reveal.js {data-transition="zoom"}
 
 - The presentation is created using the `reveal.js` package
 
