@@ -161,38 +161,59 @@
 <section>
 <section id="what-kind-of-sports-younger-athletes-are-good-at" class="title-slide slide level1" data-transition="zoom">
 <h1 data-transition="zoom"><small> What kind of sports younger athletes are good at? </small></h1>
-<p><img src="presentation_files/figure-revealjs/All-sports-that-younger-athletes-are-good-at%20-1.png" width="120%" /></p>
+<p><img src="presentation_files/figure-revealjs/All-sports-that-younger-athletes-are-good-at%20-1.png" width="110%" /></p>
 </section>
-<section id="the-top-12-sports-the-younger-athletes-are-good-at" class="slide level2">
-<h2>The top 12 sports the younger athletes are good at</h2>
+<section id="the-top-12-sports-the-younger-athletes-are-good-at" class="slide level2" data-transition="zoom">
+<h2 data-transition="zoom">The top 12 sports the younger athletes are good at</h2>
 <p><img src="presentation_files/figure-revealjs/top_12%20-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </section></section>
-<section>
-<section id="different-widths" class="title-slide slide level1">
-<h1>Different widths</h1>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>Some text</li>
-<li>goes here</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img src="presentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="100%" /></p>
-</div>
-</div>
-<ul>
-<li>Make sure to commit and push all resulting files to your GitHub repo</li>
-</ul>
+<section id="the-probability-of-winning-a-medal-vs-age" class="title-slide slide level1" data-transition="zoom">
+<h1 data-transition="zoom"><small>The probability of winning a medal vs age </small></h1>
+<p><img src="presentation_files/figure-revealjs/probability-vs-age-1.png" width="90%" /></p>
 </section>
-<section id="the-two-spikes-around-the-age-46-and-52." class="slide level2" data-transition="zoom">
-<h2 data-transition="zoom">The two spikes around the age 46 and 52.</h2>
-<p>It’s possible to have a horizontal sliding transition as well as nest multiple slides to create a vertical stack.</p>
-<p>When presenting, you use the left/right arrows to step through the top-level (horizontal) slides. When you arrive at a vertical stack you can optionally press the up/down arrows to view the vertical slides or skip past them by pressing the right arrow.</p>
-<p>(click the down key now)</p>
+
+<section>
+<section id="the-two-spikes-around-the-age-44-and-55." class="title-slide slide level1" data-transition="zoom">
+<h1 data-transition="zoom"><small>The two spikes around the age 44 and 55. </small></h1>
+<p><img src="presentation_files/figure-revealjs/probability-vs-age-44-55-1.png" width="80%" /></p>
+</section>
+<section id="the-number-of-medals-per-age-between-44-and-55." class="slide level2" data-transition="zoom">
+<h2 data-transition="zoom">The number of medals per age between 44 and 55.</h2>
+<p><img src="presentation_files/figure-revealjs/number-vs-age-44-55-1.png" width="80%" /></p>
 </section></section>
 <section>
-<section id="reveal.js" class="title-slide slide level1" data-transition="zoom">
-<h1 data-transition="zoom">reveal.js</h1>
+<section id="the-strike-at-age-46" class="title-slide slide level1">
+<h1>The strike at age 46</h1>
+<ul>
+<li>asdf</li>
+</ul>
+<pre><code>## # A tibble: 8 × 2
+##   sport             n
+##   &lt;chr&gt;         &lt;int&gt;
+## 1 Equestrianism    47
+## 2 Shooting         14
+## 3 Sailing          11
+## 4 Curling           3
+## 5 Rowing            3
+## 6 Fencing           2
+## 7 Archery           1
+## 8 Bobsleigh         1</code></pre>
+</section>
+<section id="the-strike-at-age-52" class="slide level2">
+<h2>The strike at age 52</h2>
+<p>-asdf</p>
+<pre><code>## # A tibble: 5 × 2
+##   sport             n
+##   &lt;chr&gt;         &lt;int&gt;
+## 1 Equestrianism    16
+## 2 Sailing           4
+## 3 Shooting          3
+## 4 Fencing           1
+## 5 Rowing            1</code></pre>
+</section></section>
+<section>
+<section id="dd" class="title-slide slide level1">
+<h1>dd</h1>
 <ul>
 <li><p>The presentation is created using the <code>reveal.js</code> package</p></li>
 <li><p>You can create a slide show broken up into sections by using the # and ## heading tags</p></li>
@@ -234,15 +255,15 @@ like this
 
 <section id="code" class="title-slide slide level1">
 <h1>Code</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a boring regression</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a boring regression</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
 ## 2 speed           3.93     0.416      9.46 1.49e-12</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 12
 ##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
 ##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -264,11 +285,11 @@ like this
 <li>goes here</li>
 </ul>
 </div><div class="column">
-<p><img src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="100%" /></p>
+<p><img src="presentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="100%" /></p>
 </div>
 </div>
 </section>
-<section id="different-widths-1" class="slide level2">
+<section id="different-widths" class="slide level2">
 <h2>Different widths</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -277,7 +298,7 @@ like this
 <li>goes here</li>
 </ul>
 </div><div class="column" style="width:60%;">
-<p><img src="presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="100%" /></p>
+<p><img src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="100%" /></p>
 </div>
 </div>
 </section></section>
