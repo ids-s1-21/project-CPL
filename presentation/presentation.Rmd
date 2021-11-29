@@ -177,6 +177,8 @@ olympics %>%
   geom_boxplot()
 ```
 
+# kk
+
 - The presentation is created using the `reveal.js` package
 
 - You can create a slide show broken up into sections by using the # and ## heading tags
