@@ -37,17 +37,17 @@ Are younger athletes more likely to have a better performance than older athlete
 include_graphics(c("https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=auto", "https://p0.itc.cn/q_70/images03/20210726/3436c6131ced4185ac9dc9e90f80ab0f.jpeg"))
 ```
 
+## Olympics game 
 
-## We are going to add variable(sports) and analyse questions by sports {data-transition="zoom"}
+<median>
 
-Specific questions: 
+* The modern Olympic Games are leading international sporting event.
 
-1. The number of athletes per age and see what kind of sports that younger athletes are good at using ggplot.
-
-2. Which sports cause the two spikes around the age 46 and 52. 
-
-3. Make a model related to the age and the probability of wining medals.
-
+* The Olympic Games are normally held every four years.
+</median>
+```{r Olympics , echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics("https://i0.wp.com/animationvisarts.com/wp-content/uploads/2016/11/Olympics-Logo.jpg?w=500&ssl=1")
+```
 
 ## The number of athletes per age {data-transition="zoom"}
 
