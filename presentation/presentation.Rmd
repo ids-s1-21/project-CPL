@@ -177,7 +177,7 @@ olympics %>%
   geom_boxplot()
 ```
 
-# Modelling (Probability of wining medals vs Height)
+# <small> Probability of wining medals vs Height </small>
 
 ```{r modelling, echo=FALSE}
 model_olympics <- olympics %>%
