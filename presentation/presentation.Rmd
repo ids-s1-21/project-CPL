@@ -30,7 +30,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 olympics <- read_csv(here::here("data/olympics.csv"))
 ```
 
-## Olympics game 
+# Olympics game 
 
 <median>
 
@@ -43,7 +43,7 @@ include_graphics("https://i0.wp.com/animationvisarts.com/wp-content/uploads/2016
 ```
 
 
-## General Research Question {data-transition="zoom"}
+# General Research Question {data-transition="zoom"}
 
 Are younger athletes more likely to have a better performance than older athletes?
 ```{r young athelet , echo = FALSE, out.width = "50%", fig.align = "default", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
@@ -51,7 +51,7 @@ include_graphics(c("https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=
 ```
 
 
-## The number of athletes per age {data-transition="zoom"}
+# The number of athletes per age {data-transition="zoom"}
 
 ```{r number-of-athletes-per-age, echo = FALSE}
 olympics_medal <- olympics %>%
@@ -73,7 +73,7 @@ olympics_medal %>%
 
 # <small> What kind of sports younger athletes are good at? </small> {data-transition="zoom"}
 
-```{r All-sports-that-younger-athletes-are-good-at , echo = FALSE}
+```{r All-sports-that-younger-athletes-are-good-at , out.width = "110%", echo = FALSE}
 olympics %>%
   group_by(sport) %>%
   na.omit(medal) %>%
@@ -86,7 +86,6 @@ olympics %>%
 
 ## The top 12 sports the younger athletes are good at
 
-:::: {.column width="90%"}
 ```{r top_12 , echo = FALSE, fig.align = "center"}
 olympics %>%
   group_by(sport) %>%
@@ -97,8 +96,6 @@ olympics %>%
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 30))
 ```
-::::
-
 
 # Different widths
 
