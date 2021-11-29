@@ -177,8 +177,29 @@ olympics %>%
   geom_boxplot()
 ```
 
-# kk
+# Modelling (Probability of wining medals vs Height)
 
+```{r modelling, echo=FALSE}
+model_olympics <- olympics %>%
+  mutate(medal_yes = if_else(
+  medal %in% c("Gold", "Silver", "Bronze"),
+  true = 1,
+  false = 0
+  ))
+
+yes_model_olympics <- model_olympics %>%
+  group_by(height) %>%
+  mutate(probability_medal = sum(medal_yes)/nrow(model_olympics)) %>%
+  filter(medal_yes == 1) %>%
+  filter(height >= 150, height <= 185)
+
+yes_model_olympics %>%
+  ggplot(aes(x = height, y = probability_medal)) +
+  geom_line()
+```
+
+
+## Hi
 - The presentation is created using the `reveal.js` package
 
 - You can create a slide show broken up into sections by using the # and ## heading tags
