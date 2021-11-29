@@ -165,7 +165,12 @@ olympics_medal <- olympics %>%
 
 olympics_medal %>%
   ggplot(aes(x = age, y = n)) +
-  geom_line()
+  geom_line() +
+  labs(
+    x = "Age",
+    y = "Number of athletes"
+  ) +
+  theme_minimal()
 ```
 
 ![](proposal_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
