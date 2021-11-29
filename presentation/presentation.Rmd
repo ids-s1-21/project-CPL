@@ -165,9 +165,9 @@ olympics %>%
   count(sport, sort = TRUE)
 ```
 
-# The top 3 sports the older athelets are good at
+## The top 3 sports the older athelets are good at
 
-```{r top-3}
+```{r top-3, echo=FALSE}
 olympics %>%
   filter(sport %in% c("Equestrianism", "Sailing", "Shooting")) %>%
   na.omit(medal) %>%
