@@ -71,7 +71,7 @@ olympics_medal %>%
   theme_minimal()
 ```
 
-## What kind of sports younger athletes are good at? {data-transition="zoom"} 
+# <small> What kind of sports younger athletes are good at? </small> {data-transition="zoom"}
 
 ```{r All-sports-that-younger-athletes-are-good-at , echo = FALSE}
 olympics %>%
@@ -86,8 +86,8 @@ olympics %>%
 
 ## The top 12 sports the younger athletes are good at
 
-:::: column
-```{r Top12-sports-that-younger-athletes-are-good-at , echo = FALSE}
+:::: {.column width="90%"}
+```{r top_12 , echo = FALSE, fig.align = "center"}
 olympics %>%
   group_by(sport) %>%
   na.omit(medal) %>%
