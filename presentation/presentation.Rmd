@@ -84,7 +84,7 @@ olympics %>%
 ```
 
 
-## The top 12 highest attended sports 
+## The top 12 sports the younger athletes are good at
 
 :::: column
 ```{r Top12-sports-that-younger-athletes-are-good-at , echo = FALSE}
@@ -92,12 +92,11 @@ olympics %>%
   group_by(sport) %>%
   na.omit(medal) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
-  filter(sport %in% c("Athletics","Gymnastics","Swimming","Shooting",		"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
+  filter(sport %in% c("Athletics", "Gymnastics", "Swimming", "Shooting",	"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
   ggplot(aes(x = sport, y = age, colour = age)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 30))
 ```
-
 ::::
 
 
