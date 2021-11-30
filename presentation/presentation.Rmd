@@ -19,6 +19,7 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(revealjs)
+library(scales)
 ```
 
 ```{r setup, include=FALSE}
@@ -38,7 +39,7 @@ olympics <- read_csv(here::here("data/olympics.csv"))
 
 * The Olympic Games are normally held every four years.
 </median>
-```{r Olympics , echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+```{r Olympics , echo = FALSE, out.width = "50%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
 include_graphics("https://i0.wp.com/animationvisarts.com/wp-content/uploads/2016/11/Olympics-Logo.jpg?w=500&ssl=1")
 ```
 
@@ -54,33 +55,38 @@ include_graphics(c("https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=
 # The number of athletes per age {data-transition="zoom"}
 
 ```{r number-of-athletes-per-age, echo = FALSE}
-olympics_medal <- olympics %>%
-  group_by(age) %>%
-  select(age, medal) %>%
+medal_by_age <- olympics %>%
   na.omit(medal) %>%
+  group_by(age) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
-  count(n_medal)
+  count(n_medal) %>%
+  select(age, n) 
 
-olympics_medal %>%
+medal_by_age %>%
   ggplot(aes(x = age, y = n)) +
   geom_line() +
   labs(
     x = "Age",
     y = "Number of athletes"
   ) +
+  scale_y_continuous(labels = label_number(scale = 0.001, suffix = "K")) +
   theme_minimal()
 ```
 
 # <small> What kind of sports younger athletes are good at? </small> {data-transition="zoom"}
 
-```{r All-sports-that-younger-athletes-are-good-at , out.width = "110%", echo = FALSE}
+```{r All-sports-that-younger-athletes-are-good-at , out.width = "90%", fig.align = "center", echo = FALSE}
 olympics %>%
   group_by(sport) %>%
   na.omit(medal) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   ggplot(aes(y = sport, x = age, colour = sport)) +
   geom_boxplot() +
-  theme(axis.text.y = element_text(size = 6), legend.position = "none")
+  theme(axis.text.y = element_text(size = 6), legend.position = "none") +
+  labs(
+    x = "Age",
+    y = "Sport"
+  )
 ```
 
 
@@ -94,13 +100,17 @@ olympics %>%
   filter(sport %in% c("Athletics", "Gymnastics", "Swimming", "Shooting",	"Cycling", "Fencing", "Rowing",	"Cross Country Skiing",	"Alpine Skiing", "Wrestling", "Football", "Sailing")) %>%
   ggplot(aes(x = sport, y = age, colour = age)) +
   geom_boxplot() +
+  labs(
+    x = "Sport",
+    y = "Age"
+  ) +
   theme(axis.text.x = element_text(angle = 30))
 ```
 
 # <small>The probability of winning a medal vs age </small> {data-transition="zoom"}
 
-```{r probability-vs-age, out.width="90%", fig.width=4, echo=FALSE}
-population <- olympics %>%
+```{r probability-vs-age, out.width="90%", fig.align = "center", echo=FALSE}
+population_by_age <- olympics %>%
   count(age)
 
 medal_by_age <- olympics %>%
@@ -110,37 +120,47 @@ medal_by_age <- olympics %>%
   count(n_medal) %>%
   select(age, n) 
 
-medal_by_age_2 <- medal_by_age %>%
-  left_join(population, by = "age")
+possibility_by_age <- medal_by_age %>%
+  left_join(population_by_age, by = "age") %>%
+  mutate(possibility = n.x/n.y)
 
-medal_by_age_2 %>%
-  mutate(proportion = n.x/n.y) %>%
-  ggplot(aes(x = age, y = proportion)) +
-  geom_line()
+possibility_by_age %>%
+  ggplot(aes(x = age, y = possibility)) +
+  geom_line() +
+  labs(
+    x = "Age",
+    y = "Probability of winning a medal"
+  ) +
+  theme_minimal()
 ```
 
 # <small>The two spikes around the age 44 and 55. </small> {data-transition="zoom"}
 
 ```{r probability-vs-age-44-55, echo=FALSE, warning=FALSE}
-medal_by_age_2 %>%
-  mutate(proportion = n.x/n.y) %>%
-  ggplot(aes(x = age, y = proportion)) +
+possibility_by_age %>%
+  ggplot(aes(x = age, y = possibility)) +
   geom_line() +
-  xlim(44,55)
+  xlim(44,55) +
+  labs(
+    x = "Age",
+    y = "Probability of winning a medal"
+  ) +
+  theme_minimal()
 ```
 
 ## The number of medals per age between 44 and 55. {data-transition="zoom"}
 
 ```{r number-vs-age-44-55, echo=FALSE, warning=FALSE}
-olympics %>%
-  group_by(age) %>%
-  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
-  count(age) %>%
-  select(age, n) %>%
+medal_by_age %>%
   ggplot(aes(x = age, y = n)) +
   geom_line() +
   xlim(44,55) +
-  ylim(0,1000)
+  ylim(0,100) +
+  labs(
+    x = "Age",
+    y = "Number of medals"
+  ) +
+  theme_minimal()
 ```
 
 # The spike at age 46
@@ -174,36 +194,46 @@ olympics %>%
   group_by(age) %>%
   mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
   ggplot(aes(x = age, y = sport, colour = age)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(
+    x = "Age",
+    y = "Sport"
+  ) +
+  theme_minimal()
 ```
 
 # <small> Probability of wining medals vs Height </small>
 
 ```{r modelling_plot, echo=FALSE}
-model_olympics <- olympics %>%
+olympics_model <- olympics %>%
   mutate(medal_yes = if_else(
   medal %in% c("Gold", "Silver", "Bronze"),
   true = 1,
   false = 0
   ))
 
-yes_model_olympics <- model_olympics %>%
+olympics_model_medal <- olympics_model %>%
   group_by(height) %>%
-  mutate(probability_medal = sum(medal_yes)/nrow(model_olympics)) %>%
+  mutate(probability_medal = sum(medal_yes)/nrow(olympics_model)) %>%
   filter(medal_yes == 1) %>%
   filter(height >= 150, height <= 185)
 
-yes_model_olympics %>%
+olympics_model_medal %>%
   ggplot(aes(x = height, y = probability_medal)) +
-  geom_line()
+  geom_line() +
+  labs(
+    x = "Height",
+    y = "Probability of winning a medal"
+  ) +
+  theme_minimal()
 ```
-<small>NB: We specified the range in 150<=height<=185 so that we can get a linear  relationship.</small>
+<small>NB: We specified the range in height between 150 and 185 so that we can get a linear  relationship.</small>
 
 ## The modelling table 
 ```{r modelling_table,echo=FALSE}
 linear_reg()%>%
   set_engine("lm")%>%
-  fit(probability_medal ~ height, data = yes_model_olympics) %>%
+  fit(probability_medal ~ height, data = olympics_model_medal) %>%
   tidy()
 ```
 *The possibility of winning a medal regarding the height is: 
