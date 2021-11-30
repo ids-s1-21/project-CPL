@@ -147,6 +147,7 @@ possibility_by_age %>%
   ) +
   theme_minimal()
 ```
+<small>what cause these two spikes? </small>
 
 ## The number of medals per age between 44 and 55. {data-transition="zoom"}
 
@@ -162,22 +163,22 @@ medal_by_age %>%
   ) +
   theme_minimal()
 ```
+<small>what cause these two spikes? </small>
 
 # The spike at age 46
 
-- asdf(Why do we have spikes? What causes it?)
-
+<small>* The top 5 kinds of sports that cause this spike</small>
 ```{r medals-by-sports-46, echo=FALSE}
 olympics %>%
   filter(age > 44, age < 48 ) %>%
   na.omit(medal) %>%
-  count(sport, sort = TRUE)
+  count(sport, sort = TRUE)%>%
+  top_n(5)
 ```
 
 ## Another spike at age 52
 
--asdf
-
+<small>* The top 5 kinds of sports that cause this spike</small>
 ```{r medals-by-sports-52, echo=FALSE}
 olympics %>%
   filter(age > 50, age < 54 ) %>%
