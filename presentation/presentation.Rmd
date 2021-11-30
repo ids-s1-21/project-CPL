@@ -167,21 +167,25 @@ medal_by_age %>%
 
 # The spike at age 46
 
-<small>* The top 5 kinds of sports that cause this spike</small>
+<small>
+- The top 5 sports that cause this spike
+</small>
 ```{r medals-by-sports-46, echo=FALSE}
 olympics %>%
-  filter(age > 44, age < 48 ) %>%
+  filter(age >= 44, age <= 48 ) %>%
   na.omit(medal) %>%
   count(sport, sort = TRUE)%>%
-  top_n(5)
+  slice(1:5)
 ```
 
 ## Another spike at age 52
 
-<small>* The top 5 kinds of sports that cause this spike</small>
+<small>
+- The top 5 sports that cause this spike
+</small>
 ```{r medals-by-sports-52, echo=FALSE}
 olympics %>%
-  filter(age > 50, age < 54 ) %>%
+  filter(age >= 50, age <= 54 ) %>%
   na.omit(medal) %>%
   count(sport, sort = TRUE)
 ```
