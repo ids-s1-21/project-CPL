@@ -64,6 +64,29 @@ Sailing and Shooting, and its upper quartile range is over the age of
 40. Now we have found out why there are spikes at the age of 48 and 52,
 so we can conclude our general research question.
 
+We also built a model regarding the possibility of winning a medal vs
+height. The reason why we did this modelling is because we were
+wondering what might have a influence on the chance of getting a medal
+apart from age and we thought height may be the representative one. The
+outcome was Probability=0.00207Height-0.224. By this equation, we can be
+able to predict what is the chance of getting a medal based on someone’s
+height. For example, if we do the calculation, an athlete whose height
+is 1.8 meters has the 14.86% of chance of getting a medal. But, the
+gradient is not representative. We suppose the reason why it is not
+representative is that there are various sports that people of various
+heights can do well. For instance, tall people tend to perform better
+than short people for basketball and volleyball and also there are
+numerous sports that athletes’ heights do not really matter.
+
+Based on the outcomes above, we can be confident to say that younger
+athletes are expected to perform better than older athletes overall.
+Because we have found the two spikes were caused by mainly one
+sport(equestrianism/horse riding), so it can be said that younger
+athletes do perform better in most of the other sports. However, it is
+difficult to say that there is a strong relationship between height and
+the possibility of gaining a medal since the gradient of the modelling
+was quite low even though it was positive.
+
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).

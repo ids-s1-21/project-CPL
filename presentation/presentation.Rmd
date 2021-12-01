@@ -222,6 +222,22 @@ olympics %>%
   theme_minimal()
 ```
 
+## The sports younger athletes are good at.  {data-transition="zoom"}
+
+```{r All-sports-that-younger-athletes-are-good-at_2 , out.width = "90%", fig.align = "center", echo = FALSE}
+olympics %>%
+  group_by(sport) %>%
+  na.omit(medal) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  ggplot(aes(y = sport, x = age, colour = sport)) +
+  geom_boxplot() +
+  theme(axis.text.y = element_text(size = 6), legend.position = "none") +
+  labs(
+    x = "Age",
+    y = "Sport"
+  )
+```
+
 # <small> Probability of wining medals vs Height </small>
 
 ```{r modelling_plot, echo=FALSE}
@@ -294,14 +310,3 @@ possibility_by_age %>%
 ```
 
 
-# Feeling adventurous?
-
-You can learn more about the options available at the following pages:
-
-- https://github.com/rstudio/revealjs
-
-- https://bookdown.org/yihui/rmarkdown/revealjs.html
-
-- http://www.jenniferbradham.org/post/reveal_js_markdown/
-
-- https://revealjs.com/
