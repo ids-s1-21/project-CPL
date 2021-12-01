@@ -53,16 +53,18 @@ from 44 to 48; for the age of 52, we chose a range between 50 and 54. So
 the two tibbles are the results of the filter function we used.
 Equestrianism, or we can call it Horse Riding, always appear to be the
 first on the ranking, followed by sailing and shooting. Is there any
-similarity between these three sports? To visualise this, we have
-specifically made three boxplots for these three sports. The median ages
-of Sailing and Shooting are close to 30, and Equestrianism is almost 35.
-Looking at the boxplot of all sports again, it is not hard to tell that
-these three sports have very large interquartile ranges. Many athletes
-with age over 50 were still winning medals in these three sports.
-Equestrianism’s lower quartile is almost the same as the median of
-Sailing and Shooting, and its upper quartile range is over the age of
-40. Now we have found out why there are spikes at the age of 48 and 52,
-so we can conclude our general research question.
+similarity between these three sports?
+
+To visualise this, we have specifically made three boxplots for these
+three sports. The median ages of Sailing and Shooting are close to 30,
+and Equestrianism is almost 35. Looking at the boxplot of all sports
+again, it is not hard to tell that these three sports have very large
+interquartile ranges. Many athletes with age over 50 were still winning
+medals in these three sports. Equestrianism’s lower quartile is almost
+the same as the median of Sailing and Shooting, and its upper quartile
+range is over the age of 40. Now we have found out why there are spikes
+at the age of 48 and 52, so we can conclude our general research
+question.
 
 We also built a model regarding the possibility of winning a medal vs
 height. The reason why we did this modelling is because we were
