@@ -88,6 +88,22 @@
 </ul>
 </section>
 
+<section id="brief-introduction-to-our-data-set" class="title-slide slide level1">
+<h1>Brief introduction to our data set</h1>
+<p>Variables:</p>
+<ul>
+<li>name: Athlete Name</li>
+<li>sex: Athlete Sex</li>
+<li>age: Athlete Age</li>
+<li>height: Athlete Height in cm</li>
+<li>team: Country/Team competing for</li>
+<li>games: Olympic games name</li>
+<li>year: Year of olympics</li>
+<li>sport: Sport</li>
+<li>medal: Medal (Gold, Silver, Bronze or NA)</li>
+</ul>
+</section>
+
 <section id="general-research-question" class="title-slide slide level1" data-transition="zoom">
 <h1 data-transition="zoom">General Research Question</h1>
 <p>Are younger athletes more likely to have a better performance than older athletes? <img src="https://img0.baidu.com/it/u=1063356333,2229327822&fm=26&fmt=auto" title="Image credit: Photo by Jörg Angeli on Unsplash." alt="Image credit: Photo by Jörg Angeli on Unsplash." width="50%" /><img src="https://p0.itc.cn/q_70/images03/20210726/3436c6131ced4185ac9dc9e90f80ab0f.jpeg" title="Image credit: Photo by Jörg Angeli on Unsplash." alt="Image credit: Photo by Jörg Angeli on Unsplash." width="50%" /></p>
@@ -113,8 +129,8 @@
 </section>
 
 <section>
-<section id="the-two-spikes-around-the-age-44-and-55." class="title-slide slide level1" data-transition="zoom">
-<h1 data-transition="zoom"><small>The two spikes around the age 44 and 55. </small></h1>
+<section id="the-two-spikes-around-the-age-46-and-52." class="title-slide slide level1" data-transition="zoom">
+<h1 data-transition="zoom"><small>The two spikes around the age 46 and 52. </small></h1>
 <p><img src="presentation_files/figure-revealjs/probability-vs-age-44-55-1.png" width="80%" /> <small>what cause these two spikes? </small></p>
 </section>
 <section id="the-number-of-medals-per-age-between-44-and-55." class="slide level2" data-transition="zoom">
@@ -124,7 +140,7 @@
 <section>
 <section id="the-spike-at-age-46" class="title-slide slide level1">
 <h1>The spike at age 46</h1>
-<p><small> - The top 5 sports that cause this spike </small></p>
+<p><small> * The top 5 sports that cause this spike </small></p>
 <pre><code>## # A tibble: 5 × 2
 ##   sport             n
 ##   &lt;chr&gt;         &lt;int&gt;
@@ -136,16 +152,15 @@
 </section>
 <section id="another-spike-at-age-52" class="slide level2">
 <h2>Another spike at age 52</h2>
-<p><small> - The top 5 sports that cause this spike </small></p>
-<pre><code>## # A tibble: 6 × 2
+<p><small> * The top 5 sports that cause this spike </small></p>
+<pre><code>## # A tibble: 5 × 2
 ##   sport             n
 ##   &lt;chr&gt;         &lt;int&gt;
 ## 1 Equestrianism    24
 ## 2 Sailing           5
 ## 3 Shooting          5
 ## 4 Fencing           3
-## 5 Curling           1
-## 6 Rowing            1</code></pre>
+## 5 Curling           1</code></pre>
 </section>
 <section id="the-top-3-sports-the-older-athelets-are-good-at" class="slide level2">
 <h2>The top 3 sports the older athelets are good at</h2>
@@ -159,12 +174,18 @@
 <section id="the-modelling-table" class="slide level2">
 <h2>The modelling table</h2>
 <pre><code>## # A tibble: 2 × 5
-##   term         estimate  std.error statistic p.value
-##   &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept) -0.0184   0.000196       -94.0       0
-## 2 height       0.000128 0.00000113     114.        0</code></pre>
+##   term         estimate   std.error statistic p.value
+##   &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) -0.0201   0.0000694       -290.       0
+## 2 height       0.000138 0.000000402      343.       0</code></pre>
 <p><em>The possibility of winning a medal regarding the height is: </em><span class="math display">\[Probability=0.000128Height-0.0184\]</span></p>
 </section></section>
+<section id="conclusion" class="title-slide slide level1">
+<h1>Conclusion</h1>
+<p><small> So, are younger athletes more likely to have a better performance than older athletes?</p>
+<p>YES.Remind that: </small> <img src="presentation_files/figure-revealjs/probability-vs-age1-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</section>
+
 <section id="feeling-adventurous" class="title-slide slide level1">
 <h1>Feeling adventurous?</h1>
 <p>You can learn more about the options available at the following pages:</p>

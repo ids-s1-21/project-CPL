@@ -43,6 +43,20 @@ olympics <- read_csv(here::here("data/olympics.csv"))
 include_graphics("https://i0.wp.com/animationvisarts.com/wp-content/uploads/2016/11/Olympics-Logo.jpg?w=500&ssl=1")
 ```
 
+# Brief introduction to our data set
+
+Variables:
+
+- name: Athlete Name
+- sex: Athlete Sex
+- age: Athlete Age
+- height: Athlete Height in cm
+- team: Country/Team competing for
+- games: Olympic games name
+- year: Year of olympics
+- sport: Sport
+- medal: Medal (Gold, Silver, Bronze or NA)
+
 
 # General Research Question {data-transition="zoom"}
 
@@ -134,7 +148,7 @@ possibility_by_age %>%
   theme_minimal()
 ```
 
-# <small>The two spikes around the age 44 and 55. </small> {data-transition="zoom"}
+# <small>The two spikes around the age 46 and 52. </small> {data-transition="zoom"}
 
 ```{r probability-vs-age-44-55, echo=FALSE, warning=FALSE}
 possibility_by_age %>%
@@ -168,7 +182,7 @@ medal_by_age %>%
 # The spike at age 46
 
 <small>
-- The top 5 sports that cause this spike
+* The top 5 sports that cause this spike
 </small>
 ```{r medals-by-sports-46, echo=FALSE}
 olympics %>%
@@ -181,13 +195,14 @@ olympics %>%
 ## Another spike at age 52
 
 <small>
-- The top 5 sports that cause this spike
+* The top 5 sports that cause this spike
 </small>
 ```{r medals-by-sports-52, echo=FALSE}
 olympics %>%
   filter(age >= 50, age <= 54 ) %>%
   na.omit(medal) %>%
-  count(sport, sort = TRUE)
+  count(sport, sort = TRUE) %>%
+  slice(1:5)
 ```
 
 ## The top 3 sports the older athelets are good at
@@ -210,21 +225,22 @@ olympics %>%
 # <small> Probability of wining medals vs Height </small>
 
 ```{r modelling_plot, echo=FALSE}
-olympics_model <- olympics %>%
-  mutate(medal_yes = if_else(
-  medal %in% c("Gold", "Silver", "Bronze"),
-  true = 1,
-  false = 0
-  ))
-
-olympics_model_medal <- olympics_model %>%
+medal_by_height <- olympics %>%
+  na.omit(medal) %>%
   group_by(height) %>%
-  mutate(probability_medal = sum(medal_yes)/nrow(olympics_model)) %>%
-  filter(medal_yes == 1) %>%
-  filter(height >= 150, height <= 185)
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(height, n) 
 
-olympics_model_medal %>%
-  ggplot(aes(x = height, y = probability_medal)) +
+possibility_by_height <- olympics %>%
+  count(height)
+
+possibility_by_height <- medal_by_height %>%
+  left_join(population_by_height, by = "height") %>%
+  mutate(possibility = n.x/n.y)
+
+possibility_by_height %>%
+  ggplot(aes(x = height, y = possibility)) +
   geom_line() +
   labs(
     x = "Height",
@@ -243,6 +259,36 @@ linear_reg()%>%
 ```
 *The possibility of winning a medal regarding the height is: 
 *$$Probability=0.000128Height-0.0184$$
+
+# Conclusion
+<small>
+So, are younger athletes more likely to have a better performance than older athletes?
+YES.Remind that:
+</small>
+```{r probability-vs-age1, out.width="70%", fig.align = "center", echo=FALSE}
+population_by_age <- olympics %>%
+  count(age)
+
+medal_by_age <- olympics %>%
+  na.omit(medal) %>%
+  group_by(age) %>%
+  mutate(n_medal = medal %in% c("Bronze", "Silver", "Gold")) %>%
+  count(n_medal) %>%
+  select(age, n) 
+
+possibility_by_age <- medal_by_age %>%
+  left_join(population_by_age, by = "age") %>%
+  mutate(possibility = n.x/n.y)
+
+possibility_by_age %>%
+  ggplot(aes(x = age, y = possibility)) +
+  geom_line() +
+  labs(
+    x = "Age",
+    y = "Probability of winning a medal"
+  ) +
+  theme_minimal()
+```
 
 
 # Feeling adventurous?
