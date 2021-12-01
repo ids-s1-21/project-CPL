@@ -222,9 +222,9 @@ olympics %>%
   theme_minimal()
 ```
 
-## The sports younger athletes are good at.  {data-transition="zoom"}
+## The sports younger athletes are good at {data-transition="zoom"}
 
-```{r All-sports-that-younger-athletes-are-good-at_2 , out.width = "90%", fig.align = "center", echo = FALSE}
+```{r All-sports-that-younger-athletes-are-good-at-again , out.width = "90%", fig.align = "center", echo = FALSE}
 olympics %>%
   group_by(sport) %>%
   na.omit(medal) %>%
@@ -282,9 +282,10 @@ linear_reg()%>%
 # Conclusion
 <small>
 So, are younger athletes more likely to have a better performance than older athletes?
-Yes.Remind that:
+Yes.
 </small>
-```{r probability-vs-age1, out.width="70%", fig.align = "center", echo=FALSE}
+
+```{r probability-vs-age-again, out.width="70%", fig.align = "center", echo=FALSE}
 population_by_age <- olympics %>%
   count(age)
 
@@ -308,5 +309,3 @@ possibility_by_age %>%
   ) +
   theme_minimal()
 ```
-
-
