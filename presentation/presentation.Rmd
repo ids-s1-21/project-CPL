@@ -222,7 +222,7 @@ olympics %>%
   theme_minimal()
 ```
 
-## The sports younger athletes are good at {data-transition="zoom"}
+## The distribution of age for all sports {data-transition="zoom"}
 
 ```{r All-sports-that-younger-athletes-are-good-at-again , out.width = "90%", fig.align = "center", echo = FALSE}
 olympics %>%
