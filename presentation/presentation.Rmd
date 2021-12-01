@@ -232,12 +232,13 @@ medal_by_height <- olympics %>%
   count(n_medal) %>%
   select(height, n) 
 
-possibility_by_height <- olympics %>%
+population_by_height <- olympics %>%
   count(height)
 
 possibility_by_height <- medal_by_height %>%
   left_join(population_by_height, by = "height") %>%
-  mutate(possibility = n.x/n.y)
+  mutate(possibility = n.x/n.y) %>%
+  filter(height <= 185, height >= 150)
 
 possibility_by_height %>%
   ggplot(aes(x = height, y = possibility)) +
@@ -246,7 +247,9 @@ possibility_by_height %>%
     x = "Height",
     y = "Probability of winning a medal"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  xlim(150, 185) +
+  ylim(0, 0.25)
 ```
 <small>NB: We specified the range in height between 150 and 185 so that we can get a linear  relationship.</small>
 
@@ -254,16 +257,16 @@ possibility_by_height %>%
 ```{r modelling_table,echo=FALSE}
 linear_reg()%>%
   set_engine("lm")%>%
-  fit(probability_medal ~ height, data = olympics_model_medal) %>%
+  fit(possibility ~ height, data = possibility_by_height) %>%
   tidy()
 ```
 *The possibility of winning a medal regarding the height is: 
-*$$Probability=0.000128Height-0.0184$$
+*$$Probability=0.00207Height-0.224$$
 
 # Conclusion
 <small>
 So, are younger athletes more likely to have a better performance than older athletes?
-YES.Remind that:
+Yes.Remind that:
 </small>
 ```{r probability-vs-age1, out.width="70%", fig.align = "center", echo=FALSE}
 population_by_age <- olympics %>%
