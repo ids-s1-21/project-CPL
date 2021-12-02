@@ -279,6 +279,8 @@ linear_reg()%>%
 *The possibility of winning a medal regarding the height is: 
 *$$Probability=0.00207Height-0.224$$
 
+<small>Example: An athlete whose height is 1.8 meters has the 14.86% of chance of getting a medal.</small>
+
 # Conclusion
 <small>
 So, are younger athletes more likely to have a better performance than older athletes?
